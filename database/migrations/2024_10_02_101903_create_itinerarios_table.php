@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('itinerarios', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->string('nombre');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('foto_perfil')->nullable();
-            $table->enum('rol', ['admin', 'turista']);
-            $table->rememberToken();
+            $table->dateTime('fecha_creacion');
+            $table->foreignId('destino_id')->constrained('destinos')->onDelete('cascade');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('itinerarios');
     }
 };

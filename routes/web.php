@@ -1,18 +1,15 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DestinoController;
+use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\ItinerarioController;
+use App\Http\Controllers\ResenaController;
+use App\Http\Controllers\PaqueteTuristicoController;
+use App\Http\Controllers\ReservaController;
+
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,5 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::resource('destinos', DestinoController::class);
+Route::resource('actividades', ActividadController::class);
+Route::resource('itinerarios', ItinerarioController::class);
+Route::resource('resenas', ResenaController::class);
+Route::resource('paquetes', PaqueteTuristicoController::class);
+Route::resource('reservas', ReservaController::class);
+
 
 require __DIR__.'/auth.php';
