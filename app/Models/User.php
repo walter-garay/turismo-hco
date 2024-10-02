@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'foto_perfil',
+        'celular',  
+        'dni',
         'rol',  // Rol: 'admin' o 'turista'
     ];
 
@@ -39,7 +41,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Resena::class);
     }
-    
+
     /**
      * The attributes that should be hidden for serialization.
      *
