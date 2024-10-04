@@ -22,8 +22,9 @@ return new class extends Migration
             $table->enum('tipo', ['actividad', 'evento']);
             $table->string('categoria');
             $table->date('fecha_evento');
-            $table->foreignId('destino_id')->constrained('destinos')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreignId('destino_id')->constrained('destinos')->onDelete('cascade');
         });
 
     }
