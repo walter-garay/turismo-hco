@@ -31,4 +31,9 @@ class Destino extends Model
     {
         return $this->hasMany(Resena::class);
     }
+
+    public function fotos()
+    {
+        return $this->hasMany(FotoDestino::class);
+    }
 }

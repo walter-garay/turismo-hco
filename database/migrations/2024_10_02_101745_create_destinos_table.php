@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('destinos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->text('descripcion');
-            $table->string('ubicacion');
-            $table->text('historia');
-            $table->string('categoria');
+            $table->string('nombre')->index(); // Index para búsquedas rápidas por nombre
+            $table->text('descripcion')->nullable();
+            $table->string('ubicacion')->nullable();
+            $table->text('historia')->nullable();
+            $table->string('categoria', 100)->index(); // Índice para buscar por categoría
             $table->timestamps();
         });
-
     }
 
     /**
