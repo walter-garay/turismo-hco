@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('nombre')->index(); // Index para búsquedas rápidas por nombre
             $table->text('descripcion')->nullable();
             $table->string('ubicacion')->nullable();
+            $table->string('direccion')->nullable(); // Campo 'direccion'
+            $table->decimal('latitud', 10, 7)->nullable(); // Campo 'latitud' para coordenadas
+            $table->decimal('longitud', 10, 7)->nullable(); // Campo 'longitud' para coordenadas
             $table->text('historia')->nullable();
             $table->string('categoria', 100)->index(); // Índice para buscar por categoría
             $table->timestamps();

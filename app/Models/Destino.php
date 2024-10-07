@@ -13,6 +13,9 @@ class Destino extends Model
         'nombre',
         'descripcion',
         'ubicacion',
+        'direccion',
+        'latitud',    
+        'longitud',   
         'historia',
         'categoria',
     ];

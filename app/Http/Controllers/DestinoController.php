@@ -12,12 +12,38 @@ class DestinoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Obtenemos todos los destinos y los pasamos a la vista
-        $destinos = Destino::with('fotos')->get();
-        return view('destinos.index', compact('destinos'));
+        // Obtener el término de búsqueda y la categoría desde la solicitud
+        $search = $request->input('search');
+        $categoria = $request->input('categoria');
+
+        // Filtrar los destinos por búsqueda y/o categoría
+        $destinos = Destino::with('fotos')
+                    ->when($search, function ($query, $search) {
+                        return $query->where('nombre', 'like', '%' . $search . '%');
+                    })
+                    ->when($categoria, function ($query, $categoria) {
+                        return $query->where('categoria', $categoria);
+                    })
+                    ->get();
+
+        // Obtener todas las categorías para el dropdown
+        $categorias = Destino::select('categoria')->distinct()->get();
+
+        // Pasar los resultados y categorías a la vista
+        return view('destinos.index', compact('destinos', 'categorias'));
     }
+
+    public function adminIndex()
+    {
+        // Obtener todos los destinos con paginación para los administradores
+        $destinos = Destino::paginate(10); // Cambia el número según tus necesidades
+        
+        // Retornar la vista de administración
+        return view('admin.destinos.index', compact('destinos'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -46,10 +72,10 @@ class DestinoController extends Controller
 
         // Crear el destino
         $destino = Destino::create($request->only([
-            'nombre',
-            'descripcion',
-            'ubicacion',
-            'historia',
+            'nombre', 
+            'descripcion', 
+            'ubicacion', 
+            'historia', 
             'categoria'
         ]));
 
@@ -104,10 +130,10 @@ class DestinoController extends Controller
 
         // Actualizar los datos del destino
         $destino->update($request->only([
-            'nombre',
-            'descripcion',
-            'ubicacion',
-            'historia',
+            'nombre', 
+            'descripcion', 
+            'ubicacion', 
+            'historia', 
             'categoria'
         ]));
 
@@ -132,13 +158,14 @@ class DestinoController extends Controller
     {
         // Eliminar las fotos asociadas al destino
         foreach ($destino->fotos as $foto) {
-            Storage::delete($foto->url); // Eliminar cada imagen del sistema de archivos
+            Storage::delete($foto->url); 
             $foto->delete();
         }
 
         // Eliminar el destino
         $destino->delete();
 
-        return redirect()->route('destinos.index')->with('success', 'Destino eliminado correctamente.');
+        return redirect()->route('admin.destinos.index')->with('success', 'Destino eliminado correctamente.');
     }
+
 }
