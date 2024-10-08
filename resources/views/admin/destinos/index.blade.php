@@ -37,12 +37,12 @@
                                     <td class="py-2 px-4 border-b">{{ $destino->ubicacion ?? __('No disponible') }}</td>
                                     <td class="py-2 px-4 border-b">{{ $destino->categoria }}</td>
                                     <td class="py-2 px-4 border-b flex space-x-2">
-                                        <!-- Botón Ver (azul para editar) -->
-                                        <a href="{{ route('destinos.show', $destino->id) }}" class="text-blue-600 hover:text-blue-800">
-                                            <x-pencil-icon class="w-4 h-4" /> 
+                                        <!-- Botón editar -->
+                                        <a href="{{ route('admin.destinos.edit', $destino->id) }}" class="text-blue-600 hover:text-blue-800">
+                                            <x-pencil-icon class="w-4 h-4" />
                                         </a>
 
-                                        <!-- Botón Eliminar (rojo con hover) -->
+                                        <!-- Botón Eliminar -->
                                         <button class="text-red-600 hover:text-red-800 ml-4" @click="open = true">
                                             <x-trash-icon class="w-4 h-4" />
                                         </button>
