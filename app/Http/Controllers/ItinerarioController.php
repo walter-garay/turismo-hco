@@ -16,15 +16,16 @@ class ItinerarioController extends Controller
      */
     public function index()
     {
-        // Obtener el usuario autenticado
         $userId = Auth::id();
 
-        // Obtener todos los itinerarios del usuario junto con sus actividades
-        $itinerarios = Itinerario::with('actividades')
-                                ->where('usuario_id', $userId)
-                                ->get();
+        // Obtener todos los itinerarios del usuario y ordenar actividades por fecha y hora de inicio
+        $itinerarios = Itinerario::with(['actividades' => function ($query) {
+            $query->orderBy('itinerario_actividades.fecha', 'asc')  // Ordenar por fecha
+                  ->orderBy('itinerario_actividades.hora_inicio', 'asc'); // Luego por hora de inicio
+        }])
+        ->where('usuario_id', $userId)
+        ->get();
 
-        // Retornar la vista y pasarle los itinerarios
         return view('itinerarios.index', compact('itinerarios'));
     }
 
