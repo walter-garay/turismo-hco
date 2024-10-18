@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Destino;
 use App\Models\FotoDestino;
+use App\Models\Itinerario;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class DestinoController extends Controller
 {
@@ -14,26 +17,33 @@ class DestinoController extends Controller
      */
     public function index(Request $request)
     {
-        // Obtener el término de búsqueda y la categoría desde la solicitud
+        // Obtener los filtros de búsqueda, categoría y ordenación
         $search = $request->input('search');
         $categoria = $request->input('categoria');
+        $ordenar = $request->input('ordenar'); // Captura la opción de ordenar
 
-        // Filtrar los destinos por búsqueda y/o categoría
-        $destinos = Destino::with('fotos')
-                    ->when($search, function ($query, $search) {
-                        return $query->where('nombre', 'like', '%' . $search . '%');
-                    })
-                    ->when($categoria, function ($query, $categoria) {
-                        return $query->where('categoria', $categoria);
-                    })
-                    ->get();
+        // Filtrar y ordenar los destinos
+        $destinos = Destino::with('fotos', 'resenas')
+            ->when($search, function ($query, $search) {
+                return $query->where('nombre', 'like', '%' . $search . '%');
+            })
+            ->when($categoria, function ($query, $categoria) {
+                return $query->where('categoria', $categoria);
+            })
+            ->when($ordenar == 'recomendados', function ($query) {
+                // Ordenar por puntuación promedio, de mayor a menor
+                return $query->withAvg('resenas', 'calificacion')
+                            ->orderByDesc('resenas_avg_calificacion');
+            })
+            ->get();
 
         // Obtener todas las categorías para el dropdown
         $categorias = Destino::select('categoria')->distinct()->get();
 
-        // Pasar los resultados y categorías a la vista
         return view('destinos.index', compact('destinos', 'categorias'));
     }
+
+
 
     public function adminIndex()
     {
@@ -101,12 +111,22 @@ class DestinoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Destino $destino)
+    public function show($id)
     {
-        // Mostramos un destino específico junto con sus fotos
-        $destino->load('fotos');
-        return view('destinos.show', compact('destino'));
+        $destino = Destino::with(['actividades', 'resenas', 'fotos'])->findOrFail($id);
+        $userId = Auth::id();
+
+        // Obtener el itinerario del usuario para este destino
+        $itinerario = Itinerario::where('usuario_id', $userId)
+                                ->where('destino_id', $destino->id)
+                                ->first();
+
+        // Obtener las actividades en el itinerario del usuario (si existe)
+        $actividadesEnItinerario = $itinerario ? $itinerario->actividades->pluck('id')->toArray() : [];
+
+        return view('destinos.show', compact('destino', 'actividadesEnItinerario'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

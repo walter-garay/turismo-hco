@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paquete_actividades', function (Blueprint $table) {
+        Schema::create('itinerario_actividades', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('paquete_id')->constrained('paquetes_turisticos')->onDelete('cascade');
+            $table->foreignId('itinerario_id')->constrained('itinerarios')->onDelete('cascade');
             $table->foreignId('actividad_id')->constrained('actividades')->onDelete('cascade');
+            $table->date('fecha')->nullable();
+            $table->time('hora_inicio')->nullable();
+            $table->time('hora_fin')->nullable();
             $table->timestamps();
         });
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paquete_actividads');
+        Schema::dropIfExists('itinerario_actividades');
     }
 };

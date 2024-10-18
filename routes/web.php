@@ -24,15 +24,24 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('destinos/{destino}/resena', action: [ResenaController::class, 'store'])->name('resenas.store');
+
+    Route::post('itinerarios/{destino}/agregar-actividad/{actividad}', [ItinerarioController::class, 'agregarActividad'])->name('itinerarios.agregarActividad');
+    Route::delete('itinerarios/{destino}/actividad/{actividad}/quitar', [ItinerarioController::class, 'quitarActividad'])->name('itinerarios.quitarActividad');
+    Route::get('itinerarios/{itinerario}/actividades/{actividad}/edit', [ItinerarioController::class, 'editActividad'])
+    ->name('itinerarios.editActividad');
+    Route::put('itinerarios/{itinerario}/actividades/{actividad}', [ItinerarioController::class, 'actualizarActividad'])
+        ->name('itinerarios.actualizarActividad');
+
 });
 
 // Rutas generales de los destinos, visibles para todos los usuarios
 Route::resource('destinos', DestinoController::class);
-
+Route::resource('itinerarios', controller: ItinerarioController::class);
 // Rutas generales para actividades, itinerarios, reseñas, paquetes y reservas
 Route::resource('actividades', ActividadController::class);
-Route::resource('itinerarios', ItinerarioController::class);
-Route::resource('resenas', ResenaController::class);
+// Route::resource('resenas', ResenaController::class);
 Route::resource('paquetes', PaqueteTuristicoController::class);
 Route::resource('reservas', ReservaController::class);
 
@@ -46,5 +55,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::put('destinos/{destino}', [DestinoController::class, 'update'])->name('admin.destinos.update');
     Route::delete('destinos/{destino}', [DestinoController::class, 'destroy'])->name('admin.destinos.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';

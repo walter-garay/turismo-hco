@@ -5,26 +5,40 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo  />
+                    <a href="{{ route('destinos.index') }}">
+                        <x-application-logo />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('destinos.index')" :active="request()->routeIs('destinos.index')">
                         {{ __('Destinos') }}
                     </x-nav-link>
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <!-- Soporte Button -->
+            <div class="flex items-center space-x-1">
+                <!-- Botón Soporte con ícono de WhatsApp -->
+                <a href="https://wa.me/51944810018?text=Hola,%20necesito%20soporte" target="_blank"
+                    class="py-2 px-4 rounded text-sm text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50 rounded-md transition ease-in-out duration-150 flex items-center space-x-1">
+                    <x-whatsapp-icon class="w-5 h-5" />
+                    <span>{{ __('Soporte') }}</span>
+                </a>
+
+                <!-- Botón Itinerario con ícono de bolsa -->
+                <a href="{{ route('itinerarios.index') }}"
+                    class="py-2 px-4 rounded text-sm text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50 rounded-md transition ease-in-out duration-150 flex items-center space-x-1">
+                    <x-bag-icon class="w-5 h-5" />
+                    <span>{{ __('Itinerarios') }}</span>
+                </a>
+
+                <!-- Settings Dropdown -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->nombre }}</div>
-
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -52,7 +66,7 @@
                 </x-dropdown>
             </div>
 
-            <!-- Hamburger -->
+            <!-- Hamburger (for mobile) -->
             <div class="-me-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -75,7 +89,7 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-base text-gray-800">{{ Auth::user()->nombre }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
 

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('destino_id')->constrained('destinos')->onDelete('cascade');
             $table->decimal('calificacion', 2, 1);
             $table->text('comentarios');
-            $table->dateTime('fecha');
             $table->timestamps();
         });
 

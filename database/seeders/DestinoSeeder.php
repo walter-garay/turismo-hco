@@ -13,6 +13,7 @@ class DestinoSeeder extends Seeder
      */
     public function run(): void
     {
+        // Crear destinos
         Destino::create([
             'nombre' => 'Machu Picchu',
             'descripcion' => 'Una de las siete maravillas del mundo, ubicada en los Andes peruanos.',
@@ -35,6 +36,7 @@ class DestinoSeeder extends Seeder
             'categoria' => 'Montaña'
         ]);
 
+        // Agrega un tercer destino: Lago Titicaca
         Destino::create([
             'nombre' => 'Lago Titicaca',
             'descripcion' => 'El lago navegable más alto del mundo, compartido entre Perú y Bolivia.',
@@ -44,6 +46,18 @@ class DestinoSeeder extends Seeder
             'longitud' => -69.5310,
             'historia' => 'Lugar de origen de la leyenda inca del dios Sol y la creación del primer inca.',
             'categoria' => 'Natural'
+        ]);
+
+        // Agrega un cuarto destino de ejemplo
+        Destino::create([
+            'nombre' => 'Valle Sagrado de los Incas',
+            'descripcion' => 'Un conjunto de valles y tierras fértiles en los Andes peruanos, antiguo centro agrícola de los incas.',
+            'ubicacion' => 'Cusco, Perú',
+            'direccion' => 'Valle Sagrado',
+            'latitud' => -13.2992,
+            'longitud' => -72.1305,
+            'historia' => 'Centro agrícola clave para los incas debido a su clima templado y tierras fértiles.',
+            'categoria' => 'Cultural'
         ]);
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Actividad extends Model
 {
     use HasFactory;
+    
+    protected $table = 'actividades';
 
     protected $fillable = [
         'nombre',
@@ -37,3 +39,4 @@ class Actividad extends Model
         return $this->belongsToMany(PaqueteTuristico::class, 'paquete_actividades');
     }
 }
+

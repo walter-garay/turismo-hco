@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PaqueteActividad extends Model
 {
     use HasFactory;
+    
+    protected $table = 'paquete_actividades';
 
     protected $fillable = [
         'paquete_id',

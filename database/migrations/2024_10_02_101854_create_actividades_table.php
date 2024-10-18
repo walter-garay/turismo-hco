@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('actividades', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->text('descripcion');
-            $table->time('hora_inicio');
-            $table->time('hora_fin');
-            $table->integer('duracion'); // en minutos
+            $table->text('descripcion')->nullable();
+            $table->time('hora_inicio')->nullable();
+            $table->time('hora_fin')->nullable();
+            $table->integer('duracion')->nullable(); // en minutos
             $table->decimal('precio', 8, 2);
             $table->enum('tipo', ['actividad', 'evento']);
-            $table->string('categoria');
-            $table->date('fecha_evento');
+            $table->string('categoria')->nullable();
+            $table->date('fecha_evento')->nullable();
             $table->timestamps();
 
             $table->foreignId('destino_id')->constrained('destinos')->onDelete('cascade');
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('actividads');
+        Schema::dropIfExists('actividades');
     }
 };

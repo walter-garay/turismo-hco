@@ -9,12 +9,18 @@ class ItinerarioActividad extends Model
 {
     use HasFactory;
 
+    protected $table = 'itinerario_actividades';
+
     protected $fillable = [
         'itinerario_id',
         'actividad_id',
         'fecha',
         'hora_inicio',
         'hora_fin',
+    ];
+
+    protected $casts = [
+        'fecha' => 'date',
     ];
 
     public function itinerario()

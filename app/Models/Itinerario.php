@@ -16,6 +16,10 @@ class Itinerario extends Model
         'destino_id',
     ];
 
+    protected $casts = [
+        'fecha_creacion' => 'date',
+    ];
+    
     public function usuario()
     {
         return $this->belongsTo(User::class);
@@ -28,6 +32,8 @@ class Itinerario extends Model
 
     public function actividades()
     {
-        return $this->belongsToMany(Actividad::class, 'itinerario_actividades');
+        return $this->belongsToMany(Actividad::class, 'itinerario_actividades')
+                    ->withPivot(['fecha', 'hora_inicio', 'hora_fin']); // Relación muchos a muchos
     }
+
 }
