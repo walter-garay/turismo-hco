@@ -15,8 +15,8 @@ Route::get('/', function () {
 });
 
 // Ruta para el dashboard (solo accesible para usuarios autenticados)
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/destinos', action: function () {
+    return view('destinos.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Grupo de rutas protegidas para el perfil del usuario
@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('itinerarios/{itinerario}/actividades/{actividad}', [ItinerarioController::class, 'actualizarActividad'])
         ->name('itinerarios.actualizarActividad');
 
+
 });
 
 // Rutas generales de los destinos, visibles para todos los usuarios
@@ -42,7 +43,7 @@ Route::resource('itinerarios', controller: ItinerarioController::class);
 // Rutas generales para actividades, itinerarios, reseñas, paquetes y reservas
 Route::resource('actividades', ActividadController::class);
 // Route::resource('resenas', ResenaController::class);
-Route::resource('paquetes', PaqueteTuristicoController::class);
+Route::resource('paquetes', controller: PaqueteTuristicoController::class);
 Route::resource('reservas', ReservaController::class);
 
 // Grupo de rutas protegidas para administradores bajo el prefijo 'admin'
@@ -54,6 +55,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('destinos/{destino}/edit', [DestinoController::class, 'edit'])->name('admin.destinos.edit');
     Route::put('destinos/{destino}', [DestinoController::class, 'update'])->name('admin.destinos.update');
     Route::delete('destinos/{destino}', [DestinoController::class, 'destroy'])->name('admin.destinos.destroy');
+
+    // Rutas específicas para la administración de paquetes turísticos
+    Route::get('paquetes', [PaqueteTuristicoController::class, 'adminIndex'])->name('admin.paquetes.index');
+    Route::get('paquetes/create', [PaqueteTuristicoController::class, 'create'])->name('admin.paquetes.create');
+    Route::post('paquetes', [PaqueteTuristicoController::class, 'store'])->name('admin.paquetes.store');
+    Route::get('paquetes/{paquete}/edit', [PaqueteTuristicoController::class, 'edit'])->name('admin.paquetes.edit');
+    Route::put('paquetes/{paquete}', [PaqueteTuristicoController::class, 'update'])->name('admin.paquetes.update');
+    Route::delete('paquetes/{paquete}', [PaqueteTuristicoController::class, 'destroy'])->name('admin.paquetes.destroy');
 });
 
 

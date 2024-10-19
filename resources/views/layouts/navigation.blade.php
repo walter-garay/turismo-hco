@@ -15,6 +15,11 @@
                     <x-nav-link :href="route('destinos.index')" :active="request()->routeIs('destinos.index')">
                         {{ __('Destinos') }}
                     </x-nav-link>
+
+                    <!-- Enlace Paquetes turísticos -->
+                    <x-nav-link :href="route('paquetes.index')" :active="request()->routeIs('paquetes.index')">
+                        {{ __('Paquetes turísticos') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -27,11 +32,18 @@
                     <span>{{ __('Soporte') }}</span>
                 </a>
 
-                <!-- Botón Itinerario con ícono de bolsa -->
+                <!-- Botón Itinerarios con ícono de bolsa -->
                 <a href="{{ route('itinerarios.index') }}"
                     class="py-2 px-4 rounded text-sm text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50 rounded-md transition ease-in-out duration-150 flex items-center space-x-1">
-                    <x-bag-icon class="w-5 h-5" />
+                    <x-list-icon class="w-5 h-5" />
                     <span>{{ __('Itinerarios') }}</span>
+                </a>
+
+                <!-- Botón Reservas (mismo ícono que Itinerarios) -->
+                <a href="{{ route('reservas.index') }}"
+                    class="py-2 px-4 rounded text-sm text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50 rounded-md transition ease-in-out duration-150 flex items-center space-x-1">
+                    <x-bag-icon class="w-5 h-5" />
+                    <span>{{ __('Reservas') }}</span>
                 </a>
 
                 <!-- Settings Dropdown -->
@@ -81,8 +93,12 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('destinos.index')" :active="request()->routeIs('destinos.index')">
+                {{ __('Destinos') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('paquetes.index')" :active="request()->routeIs('paquetes.index')">
+                {{ __('Paquetes turísticos') }}
             </x-responsive-nav-link>
         </div>
 

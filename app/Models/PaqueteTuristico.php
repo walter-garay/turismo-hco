@@ -9,6 +9,9 @@ class PaqueteTuristico extends Model
 {
     use HasFactory;
 
+    protected $table = 'paquetes_turisticos';
+
+
     protected $fillable = [
         'nombre',
         'descripcion',
@@ -19,7 +22,7 @@ class PaqueteTuristico extends Model
 
     public function actividades()
     {
-        return $this->belongsToMany(Actividad::class, 'paquete_actividades');
+        return $this->belongsToMany(Actividad::class, 'paquete_actividades', 'paquete_id', 'actividad_id');
     }
 
     public function destino()

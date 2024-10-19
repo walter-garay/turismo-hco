@@ -47,8 +47,7 @@ class ResenaController extends Controller
             'fecha' => now(),
         ]);
 
-        return redirect()->route('destinos.show', $destino->id)
-                        ->with('success', 'Tu reseña ha sido registrada con éxito.');
+        return back()->with('success', 'Tu reseña ha sido registrada con éxito.');
     }
 
     /**

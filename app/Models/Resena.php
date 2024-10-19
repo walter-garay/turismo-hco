@@ -14,7 +14,6 @@ class Resena extends Model
         'destino_id',
         'calificacion',
         'comentarios',
-        'fecha',
     ];
 
     public function usuario()
