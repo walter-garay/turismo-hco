@@ -5,19 +5,19 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('destinos.index') }}">
+                    <a href="{{ Auth::user()->rol === 'admin' ? route('admin.destinos.index') : route('destinos.index') }}">
                         <x-application-logo />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('destinos.index')" :active="request()->routeIs('destinos.index')">
+                    <x-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.destinos.index') : route('destinos.index')" :active="request()->routeIs('destinos.index') || request()->routeIs('admin.destinos.index')">
                         {{ __('Destinos') }}
                     </x-nav-link>
 
                     <!-- Enlace Paquetes turísticos -->
-                    <x-nav-link :href="route('paquetes.index')" :active="request()->routeIs('paquetes.index')">
+                    <x-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.paquetes.index') : route('paquetes.index')" :active="request()->routeIs('paquetes.index') || request()->routeIs('admin.paquetes.index')">
                         {{ __('Paquetes turísticos') }}
                     </x-nav-link>
                 </div>
@@ -32,19 +32,22 @@
                     <span>{{ __('Soporte') }}</span>
                 </a>
 
-                <!-- Botón Itinerarios con ícono de bolsa -->
-                <a href="{{ route('itinerarios.index') }}"
-                    class="py-2 px-4 rounded text-sm text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50 rounded-md transition ease-in-out duration-150 flex items-center space-x-1">
-                    <x-list-icon class="w-5 h-5" />
-                    <span>{{ __('Itinerarios') }}</span>
-                </a>
+                <!-- Botones Itinerarios y Reservas solo si el usuario no es admin -->
+                @if (Auth::user()->rol !== 'admin')
+                    <!-- Botón Itinerarios con ícono de lista -->
+                    <a href="{{ route('itinerarios.index') }}"
+                        class="py-2 px-4 rounded text-sm text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50 rounded-md transition ease-in-out duration-150 flex items-center space-x-1">
+                        <x-list-icon class="w-5 h-5" />
+                        <span>{{ __('Itinerarios') }}</span>
+                    </a>
 
-                <!-- Botón Reservas (mismo ícono que Itinerarios) -->
-                <a href="{{ route('reservas.index') }}"
-                    class="py-2 px-4 rounded text-sm text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50 rounded-md transition ease-in-out duration-150 flex items-center space-x-1">
-                    <x-bag-icon class="w-5 h-5" />
-                    <span>{{ __('Reservas') }}</span>
-                </a>
+                    <!-- Botón Reservas con ícono de bolsa -->
+                    <a href="{{ route('reservas.index') }}"
+                        class="py-2 px-4 rounded text-sm text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50 rounded-md transition ease-in-out duration-150 flex items-center space-x-1">
+                        <x-bag-icon class="w-5 h-5" />
+                        <span>{{ __('Reservas') }}</span>
+                    </a>
+                @endif
 
                 <!-- Settings Dropdown -->
                 <x-dropdown align="right" width="48">
@@ -93,11 +96,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('destinos.index')" :active="request()->routeIs('destinos.index')">
+            <x-responsive-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.destinos.index') : route('destinos.index')" :active="request()->routeIs('destinos.index') || request()->routeIs('admin.destinos.index')">
                 {{ __('Destinos') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('paquetes.index')" :active="request()->routeIs('paquetes.index')">
+            <x-responsive-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.paquetes.index') : route('paquetes.index')" :active="request()->routeIs('paquetes.index') || request()->routeIs('admin.paquetes.index')">
                 {{ __('Paquetes turísticos') }}
             </x-responsive-nav-link>
         </div>
@@ -111,7 +114,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Mi perfil') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -121,7 +124,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Cerrar sesión') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
