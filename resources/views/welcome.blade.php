@@ -28,6 +28,16 @@
                     <a href="/register" class="text-gray-800 mx-4 hover:underline">Registrar</a>
                     <a href="/login" class="text-gray-800 mx-4 hover:underline">Iniciar sesión</a>
                 @endguest
+                @auth
+                    @if(Auth::user()->rol === 'admin')
+                        <a href="/admin/destinos" class="text-gray-800 mx-4 hover:underline">Destinos</a>
+                        <a href="/admin/paquetes" class="text-gray-800 mx-4 hover:underline">Paquetes</a>
+                    @else
+                        <a href="/destinos" class="text-gray-800 mx-4 hover:underline">Destinos</a>
+                        <a href="/paquetes" class="text-gray-800 mx-4 hover:underline">Paquetes</a>
+                    @endif
+                @endauth
+
             </div>
         </div>
     </nav>
