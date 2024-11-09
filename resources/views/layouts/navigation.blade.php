@@ -20,6 +20,11 @@
                     <x-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.paquetes.index') : route('paquetes.index')" :active="request()->routeIs('paquetes.index') || request()->routeIs('admin.paquetes.index')">
                         {{ __('Paquetes turísticos') }}
                     </x-nav-link>
+
+                    <!-- Enlace Calendario de Eventos -->
+                    <x-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.actividades.index') : route('eventos.index')" :active="request()->routeIs('eventos.index') || request()->routeIs('admin.actividades.index')">
+                        {{ __('Eventos') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -102,6 +107,11 @@
 
             <x-responsive-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.paquetes.index') : route('paquetes.index')" :active="request()->routeIs('paquetes.index') || request()->routeIs('admin.paquetes.index')">
                 {{ __('Paquetes turísticos') }}
+            </x-responsive-nav-link>
+
+            <!-- Enlace Calendario de Eventos Responsive -->
+            <x-responsive-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.actividades.index') : route('eventos.index')" :active="request()->routeIs('eventos.index') || request()->routeIs('admin.actividades.index')">
+                {{ __('Eventos') }}
             </x-responsive-nav-link>
         </div>
 
