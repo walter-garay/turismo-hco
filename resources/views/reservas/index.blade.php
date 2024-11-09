@@ -32,7 +32,16 @@
                                     <td class="py-2 px-4 border-b">{{ \Carbon\Carbon::parse($reserva->fecha_reserva)->format('d/m/Y H:i') }}</td>
                                     <td class="py-2 px-4 border-b">{{ $reserva->num_personas }}</td>
                                     <td class="py-2 px-4 border-b">S/. {{ number_format($reserva->precio_total, 2) }}</td>
-                                    <td class="py-2 px-4 border-b">{{ ucfirst($reserva->estado) }}</td>
+                                    <td class="py-2 px-4 border-b">
+                                        @if ($reserva->estado === 'pendiente de pago')
+                                            <a href="https://wa.me/51944810018?text=Hola,%20quiero%20realizar%20el%20pago%20de%20mi%20reservación%20ID%20{{ $reserva->id }}" target="_blank"
+                                                class="text-blue-600 hover:text-blue-800 underline">
+                                                {{ __('Realizar el pago') }}
+                                            </a>
+                                        @else
+                                            {{ ucfirst($reserva->estado) }}
+                                        @endif
+                                    </td>
                                     <td class="py-2 px-4 border-b flex space-x-2">
                                         @if ($reserva->estado === 'pendiente de pago')
                                             <form action="{{ route('reservas.destroy', $reserva->id) }}" method="POST">
@@ -51,6 +60,7 @@
                                 </tr>
                             @endforelse
                         </tbody>
+
                     </table>
 
                     <!-- Paginación -->

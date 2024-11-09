@@ -10,7 +10,13 @@
             @forelse ($itinerarios as $itinerario)
                 <div class="bg-white shadow-sm sm:rounded-lg mb-8">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <h3 class="text-base font-bold mb-4 text-green-600">{{ $itinerario->nombre }} </h3>
+                        <!-- Título del itinerario y botón Exportar a PDF -->
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-base font-bold text-green-600">{{ $itinerario->nombre }}</h3>
+                            <button class="bg-gray-200 text-gray-700 font-semibold py-1 px-3 rounded hover:bg-gray-300">
+                                {{ __('Exportar a PDF') }}
+                            </button>
+                        </div>
 
                         @if($itinerario->actividades->isNotEmpty())
                             <table class="table-auto w-full">
