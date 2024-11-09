@@ -55,7 +55,7 @@
                         <!-- Fecha del Evento y Horario (en la misma fila) -->
                         <div class="grid grid-cols-3 gap-4 mb-4">
                             <div>
-                                <label for="fecha_evento" class="block text-sm font-medium text-gray-700">{{ __('Fecha del Evento') }}</label>
+                                <label for="fecha_evento" class="block text-sm font-medium text-gray-700">{{ __('Fecha (solo si la actividad tiene una fecha específica)') }}</label>
                                 <input type="date" name="fecha_evento" id="fecha_evento" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('fecha_evento', $actividad->fecha_evento) }}">
                                 @error('fecha_evento')
                                     <span class="text-red-600 text-sm">{{ $message }}</span>
