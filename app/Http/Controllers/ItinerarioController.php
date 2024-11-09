@@ -9,6 +9,8 @@ use App\Models\ItinerarioActividad;
 use App\Models\Destino;
 use Illuminate\Support\Facades\Auth;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class ItinerarioController extends Controller
 {
     /**
@@ -27,6 +29,19 @@ class ItinerarioController extends Controller
         ->get();
 
         return view('itinerarios.index', compact('itinerarios'));
+    }
+
+    public function exportarPdf($id)
+    {
+        $itinerario = Itinerario::with('actividades')->findOrFail($id);
+
+        // Reemplazar caracteres especiales en el nombre del archivo
+        $filename = 'itinerario_' . preg_replace('/[^A-Za-z0-9\-]/', '_', $itinerario->nombre) . '.pdf';
+
+        $pdf = Pdf::loadView('itinerarios.pdf', compact('itinerario'))
+                ->setPaper('a4', 'portrait');
+
+        return $pdf->download($filename);
     }
 
 

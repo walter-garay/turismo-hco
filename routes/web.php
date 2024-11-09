@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('itinerarios.editActividad');
     Route::put('itinerarios/{itinerario}/actividades/{actividad}', [ItinerarioController::class, 'actualizarActividad'])
         ->name('itinerarios.actualizarActividad');
+    Route::get('/itinerarios/{id}/exportar-pdf', [ItinerarioController::class, 'exportarPdf'])->name('itinerarios.exportarPdf');
 });
 
 // Rutas generales de los destinos, visibles para todos los usuarios

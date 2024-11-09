@@ -13,10 +13,11 @@
                         <!-- Título del itinerario y botón Exportar a PDF -->
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-base font-bold text-green-600">{{ $itinerario->nombre }}</h3>
-                            <button class="bg-gray-200 text-gray-700 font-semibold py-1 px-3 rounded hover:bg-gray-300">
+                            <a href="{{ route('itinerarios.exportarPdf', $itinerario->id) }}" class="bg-gray-200 text-gray-700 font-semibold py-1 px-3 rounded hover:bg-gray-300">
                                 {{ __('Exportar a PDF') }}
-                            </button>
+                            </a>
                         </div>
+
 
                         @if($itinerario->actividades->isNotEmpty())
                             <table class="table-auto w-full">
