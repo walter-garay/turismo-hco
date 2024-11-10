@@ -47,6 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.6/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.6/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.6/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.6/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/locales/es.js"></script>
 
     <script>
@@ -54,7 +55,7 @@
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
+                initialView: 'listMonth', // Cambia la vista inicial a la vista de lista mensual
                 locale: 'es',
                 events: [
                     @foreach($eventos as $evento)
@@ -70,7 +71,7 @@
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,dayGridWeek,dayGridDay'
+                    right: 'dayGridMonth,listMonth,dayGridWeek,dayGridDay'
                 },
                 selectable: true,
                 editable: false,

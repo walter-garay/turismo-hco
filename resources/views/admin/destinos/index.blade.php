@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <!-- Botón para crear un nuevo destino -->
                     <div class="flex justify-end mb-4">
-                        <a href="{{ route('destinos.create') }}" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+                        <a href="{{ route('admin.destinos.create') }}" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
                             {{ __('Agregar destino') }}
                         </a>
                     </div>
@@ -67,7 +67,7 @@
                                                             </button>
 
                                                             <!-- Formulario para eliminar -->
-                                                            <form action="{{ route('destinos.destroy', $destino->id) }}" method="POST">
+                                                            <form action="{{ route('admin.destinos.destroy', $destino->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700">

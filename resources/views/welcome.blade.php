@@ -25,8 +25,8 @@
             </div>
             <div>
                 @guest
-                    <a href="/register" class="text-gray-800 mx-4 hover:underline">Registrar</a>
                     <a href="/login" class="text-gray-800 mx-4 hover:underline">Iniciar sesión</a>
+                    <a href="/register" class="text-gray-800 mx-4 hover:underline">Registrar</a>
                 @endguest
                 @auth
                     @if(Auth::user()->rol === 'admin')

@@ -23,10 +23,10 @@
                                 <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('ID') }}</th>
                                 <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('Nombre') }}</th>
                                 <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('Tipo') }}</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('Fecha') }}</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('Horario') }}</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('Fecha/Hora') }}</th>
                                 <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('Categoría') }}</th>
                                 <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('Destino') }}</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('Precio') }}</th>
                                 <th class="py-2 px-4 border-b border-gray-300 text-left">{{ __('Acciones') }}</th>
                             </tr>
                         </thead>
@@ -36,14 +36,25 @@
                                     <td class="py-2 px-4 border-b">{{ $actividad->id }}</td>
                                     <td class="py-2 px-4 border-b">{{ $actividad->nombre }}</td>
                                     <td class="py-2 px-4 border-b">{{ ucfirst($actividad->tipo) }}</td>
+
+                                    <!-- Fecha y Horario -->
                                     <td class="py-2 px-4 border-b">
-                                        {{ $actividad->fecha_evento ? \Carbon\Carbon::parse($actividad->fecha_evento)->format('d/m/Y') : __('No definida') }}
+                                        <div>{{ $actividad->fecha_evento ? \Carbon\Carbon::parse($actividad->fecha_evento)->format('d/m/Y') : __('No definida') }}</div>
+                                        <div class="text-sm text-gray-500">
+                                            {{ $actividad->hora_inicio && $actividad->hora_fin
+                                                ? \Carbon\Carbon::parse($actividad->hora_inicio)->format('H:i') . ' - ' . \Carbon\Carbon::parse($actividad->hora_fin)->format('H:i')
+                                                : __('No definido') }}
+                                        </div>
                                     </td>
-                                    <td class="py-2 px-4 border-b">
-                                        {{ $actividad->hora_inicio && $actividad->hora_fin ? \Carbon\Carbon::parse($actividad->hora_inicio)->format('H:i') . ' - ' . \Carbon\Carbon::parse($actividad->hora_fin)->format('H:i') : __('No definido') }}
-                                    </td>
+
                                     <td class="py-2 px-4 border-b">{{ $actividad->categoria ?? __('Sin categoría') }}</td>
                                     <td class="py-2 px-4 border-b">{{ $actividad->destino->nombre ?? __('Sin destino') }}</td>
+
+                                    <!-- Precio -->
+                                    <td class="py-2 px-4 border-b">
+                                        {{ $actividad->precio ? 'S/. ' . number_format($actividad->precio, 2) : __('Gratis') }}
+                                    </td>
+
                                     <td class="py-2 px-4 border-b flex space-x-2">
                                         <!-- Botón editar -->
                                         <a href="{{ route('admin.actividades.edit', $actividad->id) }}" class="text-blue-600 hover:text-blue-800">

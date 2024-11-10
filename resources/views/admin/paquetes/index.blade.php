@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <!-- Botón para crear un nuevo paquete turístico -->
                     <div class="flex justify-end mb-4">
-                        <a href="{{ route('paquetes.create') }}" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+                        <a href="{{ route('admin.paquetes.create') }}" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
                             {{ __('Agregar paquete turístico') }}
                         </a>
                     </div>
@@ -38,7 +38,7 @@
                                     <td class="py-2 px-4 border-b">{{ __('S/.') }}{{ $paquete->precio_individual }}</td>
                                     <td class="py-2 px-4 border-b flex space-x-2">
                                         <!-- Botón editar -->
-                                        <a href="{{ route('paquetes.edit', $paquete->id) }}" class="text-blue-600 hover:text-blue-800">
+                                        <a href="{{ route('admin.paquetes.edit', $paquete->id) }}" class="text-blue-600 hover:text-blue-800">
                                             <x-pencil-icon class="w-4 h-4" />
                                         </a>
 
@@ -67,7 +67,7 @@
                                                             </button>
 
                                                             <!-- Formulario para eliminar -->
-                                                            <form action="{{ route('paquetes.destroy', $paquete->id) }}" method="POST">
+                                                            <form action="{{ route('admin.paquetes.destroy', $paquete->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700">

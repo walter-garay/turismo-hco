@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('paquete_id')->constrained('paquetes_turisticos')->onDelete('cascade');
+            $table->foreignId('itinerario_id')->constrained('itinerarios')->onDelete('cascade');
 
             $table->enum('estado', ['confirmada', 'cancelada', 'pendiente de pago']);
             $table->dateTime('fecha_reserva');

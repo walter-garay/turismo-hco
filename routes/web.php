@@ -21,7 +21,19 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('destinos/{destino}/resena', [ResenaController::class, 'store'])->name('resenas.store');
+    Route::get('destinos', [DestinoController::class, 'index'])->name('destinos.index');
+    Route::get('destinos/{destino}', [DestinoController::class, 'show'])->name('destinos.show');
 
+    Route::get('paquetes', [PaqueteTuristicoController::class, 'index'])->name('paquetes.index');
+    Route::get('paquetes/{paquete}', [PaqueteTuristicoController::class, 'show'])->name('paquetes.show');
+
+    Route::get('reservas', [ReservaController::class, 'index'])->name('reservas.index');
+    Route::get('reservas/create', [ReservaController::class, 'create'])->name('reservas.create');
+    Route::post('reservas', [ReservaController::class, 'store'])->name('reservas.store');
+    Route::delete('reservas/{reserva}', [ReservaController::class, 'destroy'])->name('reservas.destroy');
+
+    Route::get('itinerarios', [ItinerarioController::class, 'index'])->name('itinerarios.index');
+    Route::get('itinerarios/{itinerario}', [ItinerarioController::class, 'show'])->name('itinerarios.show');
     Route::post('itinerarios/{destino}/agregar-actividad/{actividad}', [ItinerarioController::class, 'agregarActividad'])
         ->name('itinerarios.agregarActividad');
     Route::delete('itinerarios/{destino}/actividad/{actividad}/quitar', [ItinerarioController::class, 'quitarActividad'])
@@ -36,12 +48,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('eventos/{id}', [ActividadController::class, 'verEvento'])->name('eventos.show');
 });
 
-// Rutas generales de los destinos, visibles para todos los usuarios
-Route::resource('destinos', DestinoController::class);
-Route::resource('itinerarios', ItinerarioController::class);
-Route::resource('actividades', ActividadController::class);
-Route::resource('paquetes', PaqueteTuristicoController::class);
-Route::resource('reservas', ReservaController::class);
 
 // Grupo de rutas protegidas para administradores bajo el prefijo 'admin'
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
@@ -68,5 +74,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::put('actividades/{actividad}', [ActividadController::class, 'update'])->name('admin.actividades.update');
     Route::delete('actividades/{actividad}', [ActividadController::class, 'destroy'])->name('admin.actividades.destroy');
 });
+
 
 require __DIR__.'/auth.php';

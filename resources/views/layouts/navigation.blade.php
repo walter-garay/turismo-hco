@@ -23,7 +23,11 @@
 
                     <!-- Enlace Calendario de Eventos -->
                     <x-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.actividades.index') : route('eventos.index')" :active="request()->routeIs('eventos.index') || request()->routeIs('admin.actividades.index')">
-                        {{ __('Eventos') }}
+                        @if (Auth::user()->rol === 'admin')
+                            {{ __('Actividades') }}
+                        @else
+                            {{ __('Eventos') }}
+                        @endif
                     </x-nav-link>
                 </div>
             </div>
@@ -111,7 +115,11 @@
 
             <!-- Enlace Calendario de Eventos Responsive -->
             <x-responsive-nav-link :href="Auth::user()->rol === 'admin' ? route('admin.actividades.index') : route('eventos.index')" :active="request()->routeIs('eventos.index') || request()->routeIs('admin.actividades.index')">
-                {{ __('Eventos') }}
+                @if (Auth::user()->rol === 'admin')
+                    {{ __('Actividades') }}
+                @else
+                    {{ __('Eventos') }}
+                @endif
             </x-responsive-nav-link>
         </div>
 

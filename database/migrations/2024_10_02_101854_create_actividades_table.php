@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('hora_inicio')->nullable();
             $table->time('hora_fin')->nullable();
             $table->integer('duracion')->nullable(); // en minutos
-            $table->decimal('precio', 8, 2);
+            $table->decimal('precio', 8, 2)->nullable();
             $table->enum('tipo', ['actividad', 'evento']);
             $table->string('categoria')->nullable();
             $table->date('fecha_evento')->nullable();
