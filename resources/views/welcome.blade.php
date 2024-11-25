@@ -52,7 +52,7 @@
 
     <!-- About Section -->
     <section class="py-12 bg-white">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
+        <div class="container mx-auto flex flex-col md:flex-row items-center gap-x-16">
             <div class="md:w-1/2 text-center md:text-left">
                 <h2 class="text-3xl font-semibold text-gray-800">¿Qué es HuánucoExplorer?</h2>
                 <p class="mt-4 text-gray-600">
@@ -60,7 +60,7 @@
                 </p>
             </div>
             <div class="md:w-1/2 mt-8 md:mt-0">
-                <img src="https://via.placeholder.com/600x400" alt="Imagen de turismo en Huánuco" class="w-full h-auto rounded-lg shadow-lg">
+                <img src="images/hco.webp" alt="Imagen de turismo en Huánuco" class="w-full h-auto rounded-lg shadow-lg">
             </div>
         </div>
     </section>
@@ -72,19 +72,19 @@
             <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 <!-- Card 1 -->
                 <div class="bg-white shadow-lg rounded-lg p-6">
-                    <img src="https://via.placeholder.com/300" alt="Lugar turístico 1" class="w-full h-48 object-cover rounded-t-lg">
+                    <img src="images/cuevas.jpg" alt="Lugar turístico 1" class="w-full h-48 object-cover rounded-t-lg">
                     <h3 class="mt-4 text-xl font-bold text-gray-800">Cueva de las Lechuzas</h3>
                     <p class="mt-2 text-gray-600">Una cueva mística habitada por cientos de lechuzas en medio de la selva.</p>
                 </div>
                 <!-- Card 2 -->
                 <div class="bg-white shadow-lg rounded-lg p-6">
-                    <img src="https://via.placeholder.com/300" alt="Lugar turístico 2" class="w-full h-48 object-cover rounded-t-lg">
+                    <img src="images/kotosh.jpg" alt="Lugar turístico 2" class="w-full h-48 object-cover rounded-t-lg">
                     <h3 class="mt-4 text-xl font-bold text-gray-800">Kotosh - Templo de las Manos Cruzadas</h3>
                     <p class="mt-2 text-gray-600">Un sitio arqueológico preincaico con más de 4000 años de antigüedad.</p>
                 </div>
                 <!-- Card 3 -->
                 <div class="bg-white shadow-lg rounded-lg p-6">
-                    <img src="https://via.placeholder.com/300" alt="Lugar turístico 3" class="w-full h-48 object-cover rounded-t-lg">
+                    <img src="images/bosque.jpg" alt="Lugar turístico 3" class="w-full h-48 object-cover rounded-t-lg">
                     <h3 class="mt-4 text-xl font-bold text-gray-800">Bosque de Piedra de Huayllay</h3>
                     <p class="mt-2 text-gray-600">Un bosque natural de impresionantes formaciones rocosas que parecen haber sido esculpidas por la naturaleza.</p>
                 </div>
