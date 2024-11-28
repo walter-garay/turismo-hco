@@ -51,7 +51,7 @@
     </header>
 
     <!-- About Section -->
-    <section class="py-12 bg-white">
+    <section class="py-12 px-6 bg-white">
         <div class="container mx-auto flex flex-col md:flex-row items-center gap-x-16">
             <div class="md:w-1/2 text-center md:text-left">
                 <h2 class="text-3xl font-semibold text-gray-800">¿Qué es HuánucoExplorer?</h2>
